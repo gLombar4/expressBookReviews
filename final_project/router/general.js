@@ -40,10 +40,24 @@ public_users.get('/',function (req, res) {
 public_users.get('/isbn/:isbn',function (req, res) {
   //Write your code here
   const isbn = req.params.isbn;
-  res.send(books[isbn])
+
+  let myPromise = new Promise((resolve, reject) => {
+    setTimeout(() => {
+        resolve("Promise Resolved");
+  }, 6000)});
+
+  console.log("Before Calling Promise");
+
+  myPromise.then((successMessage) => {
+    console.log("From Callback " + successMessage);
+    res.send(books[isbn])
+
+  })
+
+  console.log("After Calling promise");
+
 
   
-  return res.status(300).json({message: "Yet to be implemented"});
  });
   
 // Get book details based on author
