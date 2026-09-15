@@ -65,15 +65,27 @@ public_users.get('/author/:author',function (req, res) {
   //Write your code here
   const author = req.params.author;
   const books_arr = [];
-  for(var key of Object.keys(books)){
-    console.log(key + " -> " + JSON.stringify(books[key]));
-    if(books[key].author === author){
-        books_arr.push(books[key]);
-    }
-  }
-  res.send(books_arr);
 
-  return res.status(300).json({message: "Yet to be implemented"});
+  let myPromise = new Promise((resolve, reject) => {
+    setTimeout(() => {
+        resolve("Promise Resolved");
+  }, 6000)});
+
+  console.log("Before Calling Promise");
+
+  myPromise.then((successMessage) => {
+    console.log("From Callback " + successMessage);
+    for(var key of Object.keys(books)){
+        console.log(key + " -> " + JSON.stringify(books[key]));
+        if(books[key].author === author){
+            books_arr.push(books[key]);
+        }
+      }
+      res.send(books_arr);
+
+  })
+
+  console.log("After Calling promise");
 });
 
 // Get all books based on title
@@ -81,14 +93,30 @@ public_users.get('/title/:title',function (req, res) {
   //Write your code here
   const title = req.params.title;
   const books_arr = [];
-  for(var key of Object.keys(books)){
-    console.log(key + " -> " + JSON.stringify(books[key]));
-    if(books[key].title.replace(/\s/g, '') === title.replace(/\s/g, '')){
-        books_arr.push(books[key]);
-    }
-  }
-  res.send(books_arr);
-  return res.status(300).json({message: "Yet to be implemented"});
+
+  let myPromise = new Promise((resolve, reject) => {
+    setTimeout(() => {
+        resolve("Promise Resolved");
+  }, 6000)});
+
+  console.log("Before Calling Promise");
+
+  myPromise.then((successMessage) => {
+    console.log("From Callback " + successMessage);
+    for(var key of Object.keys(books)){
+        console.log(key + " -> " + JSON.stringify(books[key]));
+        if(books[key].title.replace(/\s/g, '') === title.replace(/\s/g, '')){
+            books_arr.push(books[key]);
+        }
+      }
+      res.send(books_arr);
+
+  })
+
+  console.log("After Calling promise");
+
+
+  
 });
 
 //  Get book review
