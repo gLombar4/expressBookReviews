@@ -12,16 +12,28 @@ public_users.post("/register", (req,res) => {
     "password": req.query.password
 });
 // Send a success message as the response, indicating the user has been added
-    res.send("The user " + req.query.firstName + " has been added!");
+    res.send("The user " + req.query.username + " has been added!");
   return res.status(300).json({message: "Yet to be implemented"});
 });
 
 // Get the book list available in the shop
 public_users.get('/',function (req, res) {
   //Write your code here
+  let myPromise = new Promise((resolve, reject) => {
+    setTimeout(() => {
+        resolve("Promise Resolved");
+  }, 6000)});
+
+  console.log("Before Calling Promise");
+
+  myPromise.then((successMessage) => {
+    console.log("From Callback " + successMessage);
+    res.send(JSON.stringify(books,null,4));
+  })
+
+  console.log("After Calling promise");
   
-  res.send(JSON.stringify(books,null,4));
-  return res.status(300).json({message: "Yet to be implemented"});
+  
 });
 
 // Get book details based on ISBN
